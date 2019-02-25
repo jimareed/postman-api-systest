@@ -1,0 +1,24 @@
+version: "3.3"
+services:
+  restapi:
+    image: restapi-image
+    container_name: restapi
+    ports:
+      - "8080:8080"
+    networks:
+      - default
+  apitest:
+    image: postman/newman:ubuntu
+    container_name: newman
+    depends_on:
+      - restapi
+    command:
+      - run
+      - /tmp/test-collection.json
+    volumes:
+      - ./collections:/tmp
+    networks:
+      - default
+
+networks:
+    default:

@@ -1,2 +1,62 @@
 # postman-api-systest
-Try out postman to see if it's useful for API based system testing
+Use Postman, Newman and Docker to create an API system test to test a REST service.  
+
+Follow the steps below to create a starter system test which tests **restapi** a simple REST service:
+
+1. clone https://github.com/jimareed/restapi (and cd into the directory)
+
+2. build the docker image
+```
+docker build --tag restapi-image .
+```
+
+3. start the service
+```
+docker run --name restapi -p 8080:8080 -d restapi-image
+```
+
+3. clone this repo (and cd into the directory)
+
+4. install postman https://www.getpostman.com/
+
+5. start postman and make a rest call to get an item: http://localhost:8080/api/fruit/0
+
+<p  align="center">
+    <img src="./images/postman-get-0.png" alt="Postman: get the first fruit"
+       width="90%" height="90%"/>
+</p>
+
+6. create a test to verify the status code is 200 
+
+<p  align="center">
+    <img src="./images/postman-statuscode-test.png" alt="Postman: verify status code is 200"
+       width="90%" height="90%"/>
+</p>
+
+7. create a collection in Postman and add the request to the collection, export the collection as **./collections/test-collection.json**
+
+8. stop the container
+```
+docker stop restapi
+docker rm restapi
+```
+
+9. edit ./collections/test-collection.json, replase `localhost` with `host.docker.internal`
+
+10. a docker-compose.yaml is included which starts the restapi service and starts the Postman Newman Docker container to run the tests.  Run docker compose to run the system test.  Verify that the test runs successfully.
+
+```
+docker-compose up
+```
+
+<p  align="left">
+    <img src="./images/newman-output.png" alt="Postman: verify status code is 200"
+       width="60%" height="60%"/>
+</p>
+
+
+11. Hit ctrl-c to exit and then shutdown the containers
+
+```
+docker-compose down
+```
