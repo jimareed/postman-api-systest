@@ -15,35 +15,44 @@ docker build --tag restapi-image .
 docker run --name restapi -p 8080:8080 -d restapi-image
 ```
 
-3. clone this repo (and cd into the directory)
+4. test the service, list the fruit
+```
+curl localhost:8080/api/fruit 
+```
+returns:
+```
+[{"id":"0","type":"apple"},{"id":"1","type":"orange"},{"id":"2","type":"pear"}]
+```
 
-4. install postman https://www.getpostman.com/
+5. clone this repo (and cd into the directory)
 
-5. start postman and make a rest call to get an item: http://localhost:8080/api/fruit/0
+6. install postman https://www.getpostman.com/
+
+7. start postman and make a rest call to get an item: http://localhost:8080/api/fruit/0
 
 <p  align="center">
     <img src="./images/postman-get-0.png" alt="Postman: get the first fruit"
        width="90%" height="90%"/>
 </p>
 
-6. create a test to verify the status code is 200 
+8. create a test to verify the status code is 200 
 
 <p  align="center">
     <img src="./images/postman-statuscode-test.png" alt="Postman: verify status code is 200"
        width="90%" height="90%"/>
 </p>
 
-7. create a collection in Postman and add the request to the collection, export the collection as **./collections/test-collection.json**
+9. create a collection in Postman and add the request to the collection, export the collection as **./collections/test-collection.json**
 
-8. stop the container
+10. stop the container
 ```
 docker stop restapi
 docker rm restapi
 ```
 
-9. edit ./collections/test-collection.json, replase `localhost` with `host.docker.internal`
+11. edit ./collections/test-collection.json, replase `localhost` with `host.docker.internal`
 
-10. a docker-compose.yaml is included which starts the restapi service and starts the Postman Newman Docker container to run the tests.  Run docker compose to run the system test.  Verify that the test runs successfully.
+12. a docker-compose.yaml is included which starts the restapi service and starts the Postman Newman Docker container to run the tests.  Run docker compose to run the system test.  Verify that the test runs successfully.
 
 ```
 docker-compose up
@@ -55,7 +64,7 @@ docker-compose up
 </p>
 
 
-11. Hit ctrl-c to exit and then shutdown the containers
+13. Hit ctrl-c to exit and then shutdown the containers
 
 ```
 docker-compose down
