@@ -1,6 +1,12 @@
 # postman-api-systest
 Use Postman, Newman and Docker to create an API system test to test a REST service.  
 
+<p  align="center">
+    <img src="./images/overview.png" alt="Postman: verify status code is 200"
+       width="70%" height="70%"/>
+</p>
+
+
 Follow the steps below to create a starter system test which tests **restapi** a simple REST service:
 
 1. clone https://github.com/jimareed/restapi (and cd into the directory)
